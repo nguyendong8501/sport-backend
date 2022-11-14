@@ -38,7 +38,7 @@ export const readProduct = (
 
 export const readAll = (req: Request, res: Response, next: NextFunction) => {
   return Product.find()
-    .then((products) => res.status(200).json({ products }))
+    .then((products) => res.status(200).json({success: true, products }))
     .catch((error) => res.status(500).json({ error }));
 };
 

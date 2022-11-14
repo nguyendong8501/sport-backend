@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 import Logging from "./library/Logging";
 import { config } from "./config/config";
 // import { User } from "./entity/User";
-const productRoutes = require("./routes/Product");
-const userRoutes = require("./routes/User");
+const productRouter = require("./routes/Product");
+const userRouter = require("./routes/User");
 const router = express();
 
 /** Connect to Mongo */
@@ -57,8 +57,8 @@ const StartServer = () => {
   });
 
   /** Routes */
-  router.use("/product", productRoutes);
-  router.use("/user", userRoutes);
+  router.use("/api/product", productRouter);
+  router.use("/api/user", userRouter);
 
   /** Healthcheck */
   router.get("/ping", (req, res, next) =>
