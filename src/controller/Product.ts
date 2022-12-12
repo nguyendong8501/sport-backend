@@ -6,13 +6,16 @@ const mongoose = require("mongoose");
 import Product from "../entity/Product";
 import { NextFunction, Request, Response } from "express";
 export const createProduct = (req, res, next: NextFunction) => {
-  const { name, cost, amount } = req.body;
+  const { name, cost, amount, supplier,
+    description } = req.body;
 
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name,
     cost,
-    amount
+    amount,
+    supplier,
+    description,
   });
 
   return product
@@ -47,7 +50,7 @@ export const updateProduct = (
   res: Response,
   next: NextFunction
 ) => {
-  const productId = req.params.authorId;
+  const productId = req.params.productId;
 
   return Product.findById(productId)
     .then((product) => {
@@ -70,12 +73,12 @@ export const deleteProduct = (
   res: Response,
   next: NextFunction
 ) => {
-  const productId = req.params.authorId;
+  const productId = req.params.productId;
 
   return Product.findByIdAndDelete(productId)
-    .then((author) =>
-      author
-        ? res.status(201).json({ author, message: "Deleted" })
+    .then((product) =>
+    product
+        ? res.status(201).json({ product, message: "Deleted" })
         : res.status(404).json({ message: "not found" })
     )
     .catch((error) => res.status(500).json({ error }));

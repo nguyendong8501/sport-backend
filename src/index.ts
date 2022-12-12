@@ -6,6 +6,8 @@ import { config } from "./config/config";
 // import { User } from "./entity/User";
 const productRouter = require("./routes/Product");
 const userRouter = require("./routes/User");
+const customerRouter = require("./routes/Customer");
+const supplierRouter = require("./routes/Supplier");
 const router = express();
 
 /** Connect to Mongo */
@@ -59,7 +61,8 @@ const StartServer = () => {
   /** Routes */
   router.use("/api/product", productRouter);
   router.use("/api/user", userRouter);
-
+  router.use("/api/customer", customerRouter);
+  router.use("/api/supplier", supplierRouter);
   /** Healthcheck */
   router.get("/ping", (req, res, next) =>
     res.status(200).json({ hello: "world" })
